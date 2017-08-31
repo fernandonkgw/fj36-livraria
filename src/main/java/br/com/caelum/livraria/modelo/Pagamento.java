@@ -6,8 +6,11 @@ import java.util.ArrayList;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 
 @Entity
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Pagamento implements Serializable {
 
 	private static final long serialVersionUID = 1L;

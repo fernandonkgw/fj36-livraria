@@ -16,6 +16,7 @@ import br.com.caelum.livraria.modelo.Formato;
 import br.com.caelum.livraria.modelo.Livro;
 import br.com.caelum.livraria.modelo.Pagamento;
 import br.com.caelum.livraria.modelo.Pedido;
+import br.com.caelum.livraria.rest.oauth2.AccessToken;
 
 @Controller
 @RequestMapping("/carrinho")
@@ -30,6 +31,9 @@ public class CarrinhoController{
 
 	@Autowired
 	Carrinho carrinho;
+	
+	@Autowired
+	private AccessToken accessToken;
 	
 	@PersistenceContext
 	EntityManager manager;
@@ -79,7 +83,10 @@ public class CarrinhoController{
 			return REDIRECT_CARRINHO_LISTAR;
 		}
         // Aqui fica o código de verificação do access token
-        
+        if (!accessToken.isPreenchido()) {
+        	//return "redirect:/oauth/password/form";
+        	return "redirect:/oauth/code";
+        }
 
 		this.carrinho.criarPagamento(numeroCartao, titularCartao);
 
